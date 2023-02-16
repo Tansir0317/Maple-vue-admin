@@ -5,7 +5,9 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    //Volar支持 指定全局组件类型
+    "types": ["element-plus/global"]
   },
 
   "references": [
