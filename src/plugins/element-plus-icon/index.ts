@@ -6,8 +6,8 @@
  * @LastEditors: Tansir
  * @LastEditTime: 2023-02-16 14:08:15
  */
-import type { App } from "vue";
-import * as ElementPlusIconsVue from "@element-plus/icons-vue";
+import type { App } from 'vue';
+import * as ElementPlusIconsVue from '@element-plus/icons-vue';
 
 export function loadElementPlusIcons(app: App) {
   for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
