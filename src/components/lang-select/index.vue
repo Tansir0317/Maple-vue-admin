@@ -4,11 +4,11 @@
  * @Autor: Tansir
  * @Date: 2023-02-17 13:24:05
  * @LastEditors: Tansir
- * @LastEditTime: 2023-02-17 16:05:03
+ * @LastEditTime: 2023-02-22 10:56:05
 -->
 <template>
   <el-dropdown>
-    <svg class="icon" aria-hidden="true" font-size="45px">
+    <svg class="icon" aria-hidden="true" font-size="30px">
       <use xlink:href="#icon-zhongyingwen" />
     </svg>
     <template #dropdown>
