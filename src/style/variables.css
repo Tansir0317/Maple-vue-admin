@@ -1,0 +1,44 @@
+/*
+ * @Description: 全局 CSS 变量
+ * @Version: 1.0
+ * @Autor: Tansir
+ * @Date: 2023-02-14 15:51:14
+ * @LastEditors: Tansir
+ * @LastEditTime: 2023-02-14 17:41:22
+ */
+ :root {
+    /** 全局背景色 */
+    --v3-body-bg-color: #f2f3f5;
+    /** Header 区域 = NavigationBar 组件 + TagsView 组件 */
+    --v3-header-height: calc(var(--v3-navigationbar-height) + var(--v3-tagsview-height));
+    /** NavigationBar 组件 */
+    --v3-navigationbar-height: 50px;
+    /** Sidebar 组件 */
+    --v3-sidebar-width: 220px;
+    --v3-sidebar-hide-width: 58px;
+    --v3-sidebar-menu-item-height: 60px;
+    --v3-sidebar-menu-tip-line-bg-color: #ff221f;
+    --v3-sidebar-menu-bg-color: #303030;
+    --v3-sidebar-menu-hover-bg-color: #404040;
+    --v3-sidebar-menu-text-color: #ffffff;
+    --v3-sidebar-menu-active-text-color: #ffffff;
+    /** SidebarLogo 组件 */
+    --v3-sidebarlogo-bg-color: #303030;
+    /** TagsView 组件 */
+    --v3-tagsview-height: 34px;
+    --v3-tagsview-tag-text-color: #495060;
+    --v3-tagsview-tag-active-text-color: #ffffff;
+    --v3-tagsview-tag-bg-color: #ffffff;
+    --v3-tagsview-tag-active-lbg-color: #ff221f;
+    --v3-tagsview-tag-active-rbg-color: #ff5922;
+    --v3-tagsview-tag-border-radius: 4px;
+    --v3-tagsview-tag-border-color: #d8dce5;
+    --v3-tagsview-tag-active-border-color: #ffffff;
+    --v3-tagsview-tag-active-before-color: #ffffff;
+    --v3-tagsview-tag-icon-hover-bg-color: #00000030;
+    --v3-tagsview-tag-icon-hover-color: #ffffff;
+    /* BreadCrumb 组件 */
+    --v3-breadcrumb-active-color: #fe2620;
+    --v3-breadcrumb-hover-color: #c12c27;
+  }
+  

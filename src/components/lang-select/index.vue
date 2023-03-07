@@ -4,16 +4,20 @@
  * @Autor: Tansir
  * @Date: 2023-02-17 13:24:05
  * @LastEditors: Tansir
- * @LastEditTime: 2023-02-22 10:56:05
+ * @LastEditTime: 2023-03-03 15:52:53
 -->
 <template>
   <el-dropdown>
-    <svg class="icon" aria-hidden="true" font-size="30px">
+    <svg class="icon" aria-hidden="true" font-size="18px">
       <use xlink:href="#icon-zhongyingwen" />
     </svg>
     <template #dropdown>
       <el-dropdown-menu>
-        <el-dropdown-item v-for="item in state.languages" :key="item.value" :disabled="language === item.value">
+        <el-dropdown-item
+          v-for="item in state.languages"
+          :key="item.value"
+          :disabled="language === item.value"
+        >
           <span @click="handleSetLanguage(item.value)">{{ item.name }}</span>
         </el-dropdown-item>
       </el-dropdown-menu>

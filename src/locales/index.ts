@@ -4,7 +4,7 @@
  * @Autor: Tansir
  * @Date: 2023-02-17 10:03:00
  * @LastEditors: Tansir
- * @LastEditTime: 2023-02-17 11:27:14
+ * @LastEditTime: 2023-03-06 09:00:41
  */
 import { createI18n } from 'vue-i18n';
 import { getLanguage } from '@/utils/cookies';
@@ -45,8 +45,8 @@ export const getLocale = () => {
 
 const i18n = createI18n({
   locale: getLocale(),
-  legacy: false,
   messages: messages,
 });
+// legacy: false,
 
 export default i18n;
