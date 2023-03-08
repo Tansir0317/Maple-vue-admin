@@ -14,6 +14,22 @@ vue3+element-plus+ts+pinia+webpack
   - 自适应收缩侧边栏
 ```
 
+### 开发
+
+```bash
+# clone the project
+git clone https://github.com/Tansir0317/Maple-vue-admin.git
+
+# enter the project directory
+cd Maple-vue-admin
+
+# install dependency
+npm install
+
+# develop
+npm run dev
+```
+
 ### 目录
 
 ```
