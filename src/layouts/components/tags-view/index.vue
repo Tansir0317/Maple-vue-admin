@@ -1,8 +1,9 @@
 <template>
   <div class="tags-view-container">
-    <ScrollPane class="tags-view-wrapper">
+    <ScrollPane class="tags-view-wrapper" ref="scrollPaneRef">
       <router-link
         v-for="tag in tagsViewStore.visitedViews"
+        ref="tag"
         :key="tag.path"
         :class="isActive(tag) ? 'active' : ''"
         :to="{ path: tag.path, query: tag.query }"
@@ -37,7 +38,15 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { getCurrentInstance, onMounted, ref, watch } from 'vue';
+import {
+  getCurrentInstance,
+  nextTick,
+  onMounted,
+  ref,
+  watch,
+  type ComponentInternalInstance,
+  type DefineComponent,
+} from 'vue';
 import { type RouteRecordRaw, useRoute, useRouter } from 'vue-router';
 import { type TagView, useTagsViewStateStore } from '@/stores/modules/tagsview';
 import { usePermissionStore } from '@/stores/modules/permission';
@@ -47,11 +56,12 @@ import { Close } from '@element-plus/icons-vue';
 import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
-const instance = getCurrentInstance();
+const instance = getCurrentInstance() as ComponentInternalInstance;
 const router = useRouter();
 const route = useRoute();
 const tagsViewStore = useTagsViewStateStore();
 const permissionStore = usePermissionStore();
+const scrollPaneRef = ref<DefineComponent | null>(null);
 
 const visible = ref(false);
 const top = ref(0);
@@ -178,10 +188,28 @@ const closeMenu = () => {
   visible.value = false;
 };
 
+const moveToCurrentTag = () => {
+  const tags = instance?.proxy?.$refs.tag as DefineComponent[];
+  nextTick(() => {
+    if (tags === null || tags === undefined || !Array.isArray(tags)) {
+      return;
+    }
+    for (const tag of tags) {
+      if ((tag.to as TagView).path === route.path) {
+        (scrollPaneRef.value as DefineComponent).moveToCurrentTag(tag);
+        if ((tag.to as TagView).fullPath !== route.fullPath) {
+          tagsViewStore.updateVisitedView(route);
+        }
+      }
+    }
+  });
+};
+
 watch(
   route,
   () => {
     addTags();
+    moveToCurrentTag();
   },
   {
     deep: true,
