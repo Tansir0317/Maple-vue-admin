@@ -4,7 +4,7 @@
  * @Autor: Tansir
  * @Date: 2023-03-15 10:16:18
  * @LastEditors: Tansir
- * @LastEditTime: 2023-03-15 10:16:52
+ * @LastEditTime: 2023-03-15 14:05:27
 -->
 <template>
   <svg class="svg-icon" aria-hidden="true">
@@ -34,5 +34,6 @@ const symbolId = computed(() => `#${props.prefix}-${props.name}`);
   height: 1em;
   fill: currentColor;
   overflow: hidden;
+  outline: none;
 }
 </style>

@@ -4,37 +4,35 @@
  * @Autor: Tansir
  * @Date: 2023-02-10 13:39:55
  * @LastEditors: Tansir
- * @LastEditTime: 2023-03-15 09:17:15
+ * @LastEditTime: 2023-03-15 14:05:47
 -->
 <template>
-  <div>
-    <el-dropdown id="size-select" trigger="click" @command="handleSetSize">
-      <div>
-        <svg class="icon" aria-hidden="true" font-size="20px">
-          <use xlink:href="#icon-baocunbuju" />
-        </svg>
-      </div>
-      <template #dropdown>
-        <el-dropdown-menu>
-          <el-dropdown-item
-            v-for="item of state.sizeOptions"
-            :key="item.value"
-            :disabled="size === item.value"
-            :command="item.value"
-          >
-            {{ item.label }}
-          </el-dropdown-item>
-        </el-dropdown-menu>
-      </template>
-    </el-dropdown>
-    <div />
-  </div>
+  <el-dropdown id="size-select" trigger="click" @command="handleSetSize">
+    <div>
+      <el-tooltip effect="dark" content="布局大小" placement="bottom">
+        <svg-icon name="layout" />
+      </el-tooltip>
+    </div>
+    <template #dropdown>
+      <el-dropdown-menu>
+        <el-dropdown-item
+          v-for="item of state.sizeOptions"
+          :key="item.value"
+          :disabled="size === item.value"
+          :command="item.value"
+        >
+          {{ item.label }}
+        </el-dropdown-item>
+      </el-dropdown-menu>
+    </template>
+  </el-dropdown>
 </template>
 
 <script lang="ts" setup>
 import { useAppStore, type sizeType } from '@/stores/modules/app';
 import { reactive, computed } from 'vue';
 import { ElMessage } from 'element-plus';
+import SvgIcon from '@/components/svg-icon/index.vue';
 
 const state = reactive({
   sizeOptions: [

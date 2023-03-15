@@ -1,24 +1,27 @@
 <!--
- * @Description: 
+ * @Description: 语言选择
  * @Version: 1.0
  * @Autor: Tansir
  * @Date: 2023-02-17 13:24:05
  * @LastEditors: Tansir
- * @LastEditTime: 2023-03-03 15:52:53
+ * @LastEditTime: 2023-03-15 10:43:27
 -->
 <template>
-  <el-dropdown>
-    <svg class="icon" aria-hidden="true" font-size="18px">
-      <use xlink:href="#icon-zhongyingwen" />
-    </svg>
+  <el-dropdown trigger="click" @command="handleSetLanguage">
+    <div>
+      <el-tooltip effect="dark" content="语言切换" placement="bottom">
+        <svg-icon name="zhongyingwen" />
+      </el-tooltip>
+    </div>
     <template #dropdown>
       <el-dropdown-menu>
         <el-dropdown-item
           v-for="item in state.languages"
           :key="item.value"
           :disabled="language === item.value"
+          :command="item.name"
         >
-          <span @click="handleSetLanguage(item.value)">{{ item.name }}</span>
+          <span>{{ item.name }}</span>
         </el-dropdown-item>
       </el-dropdown-menu>
     </template>
@@ -28,6 +31,7 @@
 import { computed, reactive } from 'vue';
 import { piniaStore } from '@/stores';
 import { useI18n } from 'vue-i18n';
+import SvgIcon from '@/components/svg-icon/index.vue';
 
 const { locale } = useI18n();
 const appStore = piniaStore.useAppStore;
