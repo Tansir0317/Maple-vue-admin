@@ -3,57 +3,72 @@
  * @Author: ZY
  * @Date: 2020-12-23 18:11:46
  * @LastEditors: Tansir
- * @LastEditTime: 2023-03-03 15:39:57
+ * @LastEditTime: 2023-03-15 10:23:21
 -->
-
 <template>
-  <div id="screenfull">
-    <div v-if="isFullscreen" @click="click">
-      <svg class="icon" aria-hidden="true" font-size="18px">
-        <use xlink:href="#icon-quxiaoquanping_o" />
-      </svg>
-    </div>
-    <div @click="click" v-else>
-      <svg class="icon" aria-hidden="true" font-size="18px">
-        <use xlink:href="#icon-quanping_o" />
-      </svg>
-    </div>
+  <div @click="click">
+    <el-tooltip effect="dark" :content="tips" placement="bottom">
+      <svg-icon :name="isFullscreen ? 'quxiaoquanping_o' : 'quanping_o'" />
+    </el-tooltip>
   </div>
 </template>
+
 <script lang="ts" setup>
+import { ref, onUnmounted } from 'vue';
 import { ElMessage } from 'element-plus';
 import screenfull from 'screenfull';
-import { onBeforeUnmount, onMounted, ref } from 'vue';
+import SvgIcon from '@/components/svg-icon/index.vue';
 
-const sf = screenfull;
-const isFullscreen = ref(false);
+const props = defineProps({
+  /** 全屏的元素，默认是 html */
+  element: {
+    type: String,
+    default: 'html',
+  },
+  /** 打开全屏提示语 */
+  openTips: {
+    type: String,
+    default: '全屏',
+  },
+  /** 关闭全屏提示语 */
+  exitTips: {
+    type: String,
+    default: '退出全屏',
+  },
+});
+
+const tips = ref<string>(props.openTips);
+const isFullscreen = ref<boolean>(false);
 
 const click = () => {
-  if (!sf.isEnabled) {
-    ElMessage({
-      message: 'you browser can not work',
-      type: 'warning',
-    });
-    return false;
+  const dom = document.querySelector(props.element) || undefined;
+  if (!screenfull.isEnabled) {
+    ElMessage.warning('您的浏览器无法工作');
+    return;
   }
-  sf.toggle();
+  screenfull.toggle(dom);
 };
 
 const change = () => {
-  if (sf.isEnabled) {
-    isFullscreen.value = sf.isFullscreen;
-  }
+  isFullscreen.value = screenfull.isFullscreen;
+  tips.value = screenfull.isFullscreen ? props.exitTips : props.openTips;
 };
 
-onMounted(() => {
-  if (sf.isEnabled) {
-    sf.on('change', change);
-  }
-});
+screenfull.on('change', change);
 
-onBeforeUnmount(() => {
-  if (sf.isEnabled) {
-    sf.off('change', change);
+onUnmounted(() => {
+  if (screenfull.isEnabled) {
+    screenfull.off('change', change);
   }
 });
 </script>
+
+<style lang="scss" scoped>
+.svg-icon {
+  font-size: 18px;
+
+  &:focus {
+    outline: none;
+  }
+}
+</style>
